@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,12 +32,16 @@ export class LoginComponent {
     }),
   });
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
 
   public async login() {
     await this.authService.login({
       email: this.loginForm.value.email as string,
       password: this.loginForm.value.password as string,
     });
+    await this.router.navigate(['']);
   }
 }
