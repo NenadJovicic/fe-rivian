@@ -1,1 +1,8 @@
-<p>charging works!</p>
+<div class="wrapper">
+	<h2>Charging</h2>
+	@if (currentSession) {
+	<app-current-session [session]="currentSession"></app-current-session>
+	} @else {
+	<p>abv</p>
+	}
+</div>

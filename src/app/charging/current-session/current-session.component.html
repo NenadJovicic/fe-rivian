@@ -1,0 +1,11 @@
+<h3>
+	You are currently charging on charging spot {{ session.spot?.spotName }}
+</h3>
+<h3>
+	{{ sessionDuration() }}
+</h3>
+<button mat-flat-button
+				color="primary"
+				(click)="stopCharging()">
+	Stop charging
+</button>
