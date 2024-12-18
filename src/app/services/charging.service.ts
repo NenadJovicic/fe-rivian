@@ -18,6 +18,17 @@ export class ChargingService {
     this.fetchCurrentSession();
   }
 
+  public async startCharging(selectedOfficeId: string): Promise<ChargingSessionDto | undefined> {
+    const chargingSession = await this.webService.post<ChargingSessionDto | undefined>('charging-session', {
+      userId: this.authService.user.id,
+      officeId: selectedOfficeId,
+    });
+    if (chargingSession) {
+      this.currentSessionSubject.next(chargingSession);
+    }
+    return chargingSession;
+  }
+
   public async stopCharging(id: string) {
     await this.webService.patch(`charging-session/${id}`, {});
     this.currentSessionSubject.next(undefined);

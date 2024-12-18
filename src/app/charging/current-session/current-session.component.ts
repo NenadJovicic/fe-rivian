@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { ChargingSessionDto } from '../../interfaces/charging-session.dto';
 import { ChargingService } from '../../services/charging.service';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-current-session',
@@ -33,10 +33,10 @@ export class CurrentSessionComponent implements OnInit {
 
   private convertMillisecondsToTimestamp(milliseconds: number): string {
     const timeInSeconds = Math.round(milliseconds / 1000);
-    const seconds = timeInSeconds % 60;
+    const seconds = String(timeInSeconds % 60).padStart(2, '0');
     const allMinutes = Math.floor(timeInSeconds / 60);
-    const minutes = allMinutes % 60;
-    const hours = Math.floor(allMinutes / 60);
+    const minutes = String(allMinutes % 60).padStart(2, '0');
+    const hours = String(Math.floor(allMinutes / 60)).padStart(2, '0');
     return `${hours}:${minutes}:${seconds}`;
   }
 }

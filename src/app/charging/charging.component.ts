@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { ChargingSessionDto } from '../interfaces/charging-session.dto';
 import { ChargingService } from '../services/charging.service';
 import { CurrentSessionComponent } from './current-session/current-session.component';
+import { NewChargingComponent } from './new-charging/new-charging.component';
 
 @Component({
   selector: 'app-charging',
-  imports: [CurrentSessionComponent],
+  imports: [CurrentSessionComponent, NewChargingComponent],
   templateUrl: './charging.component.html',
   styleUrl: './charging.component.scss',
   providers: [ChargingService],
