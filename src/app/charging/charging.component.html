@@ -1,5 +1,8 @@
 <div class="wrapper">
 	<h2>Rivian charging</h2>
+	<h2>Hi {{ user.firstName }} {{ user.lastName }}</h2>
+	<app-all-charging-spots></app-all-charging-spots>
+	<hr>
 	@if (currentSession) {
 	<app-current-session [session]="currentSession"></app-current-session>
 	} @else {

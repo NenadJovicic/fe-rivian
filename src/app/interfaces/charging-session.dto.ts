@@ -4,11 +4,12 @@ export interface ChargingSessionDto {
   startTime: Date;
   endTime?: string;
   spotId: string;
-  spot?: ChargingSpot;
+  spot?: ChargingSpotDto;
 }
 
-export interface ChargingSpot {
+export interface ChargingSpotDto {
   id: string;
   officeId: string;
   spotName: string;
+  chargingSessions?: ChargingSessionDto[];
 }

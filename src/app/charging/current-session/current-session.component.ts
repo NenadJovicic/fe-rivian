@@ -13,11 +13,16 @@ export class CurrentSessionComponent implements OnInit {
   @Input() session!: ChargingSessionDto;
 
   readonly sessionDuration = signal('');
+  currentOfficeName: string | undefined;
 
   constructor(private chargingService: ChargingService) {}
 
   ngOnInit() {
     this.setIntervalForDuration();
+    this.chargingService.$offices.subscribe((offices) => {
+      const sessionOffice = offices.find((office) => office.id === this.session.spot?.officeId);
+      this.currentOfficeName = sessionOffice?.name;
+    });
   }
 
   stopCharging() {

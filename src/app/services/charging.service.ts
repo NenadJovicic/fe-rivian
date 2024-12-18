@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ChargingSessionDto } from '../interfaces/charging-session.dto';
+import { ChargingSessionDto, ChargingSpotDto } from '../interfaces/charging-session.dto';
 import { OfficeDto } from '../interfaces/office.dto';
 import { AuthService } from './auth.service';
 import { WebService } from './web.service';
@@ -11,11 +11,19 @@ export class ChargingService {
   public readonly $offices = this.officesSubject.asObservable();
 
   private currentSessionSubject = new BehaviorSubject<ChargingSessionDto | undefined>(undefined);
-  public $currentSession = this.currentSessionSubject.asObservable();
+  public readonly $currentSession = this.currentSessionSubject.asObservable();
+
+  private chargingSpotsForOfficeSubject = new BehaviorSubject<ChargingSpotDto[]>([]);
+  public readonly $chargingSpotsForOffice = this.chargingSpotsForOfficeSubject.asObservable();
 
   constructor(private readonly webService: WebService, private readonly authService: AuthService) {
     this.loadOffices();
     this.fetchCurrentSession();
+  }
+
+  public async loadSpotsForOffice(id: string) {
+    const spots = await this.webService.get<ChargingSpotDto[]>(`charging-spot/office/${id}`);
+    this.chargingSpotsForOfficeSubject.next(spots);
   }
 
   public async startCharging(selectedOfficeId: string): Promise<ChargingSessionDto | undefined> {

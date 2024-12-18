@@ -1,0 +1,23 @@
+.charging-spots-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .charging-spot {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.free {
+      border: 1px solid green;
+      color: green;
+    }
+
+    &.occupied {
+      border: 1px solid red;
+      color: red;
+    }
+  }
+}
